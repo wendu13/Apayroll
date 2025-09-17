@@ -1,0 +1,145 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(to right, #eeeff3, #043d8d);
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.auth-page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25vh; /* leave space for logo */
+    position: relative;
+    min-height: 75vh;
+}
+
+.logo-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: none;
+    z-index: 1000;
+}
+
+/* Left logo - bigger */
+.left-logo img {
+    max-height: 100px; /* adjust as needed */
+    width: auto;
+    margin-top: 20px;
+}
+
+/* Right logos - smaller */
+.right-logos {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* space between logos */
+    margin-right: 30px;
+    margin-top: 20px;
+}
+
+.right-logos img {
+    max-height: 80px; /* or any size you want */
+    height: auto;
+    width: auto;
+    object-fit: contain;
+}
+
+.auth-box {
+    background-color: white;
+    width: auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.form-wrapper {
+    width: 300px; /* adjust to your preferred width */
+    margin: 0 auto; /* center horizontally */
+    padding: 10px;
+}
+
+.form-control {
+    background-color: #96b1e3 !important;
+    color: black !important;
+    box-shadow: none !important;
+    transition: none !important;
+    border-radius: 40px;
+}
+
+input.form-control:-webkit-autofill {
+    background-color: #96b1e3 !important;
+    color: black !important;
+    -webkit-text-fill-color: black !important;
+    transition: background-color 0s, color 0s;
+    box-shadow: 0 0 0px 1000px #96b1e3 inset !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #000 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.custom-check {
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+.custom-check input[type="checkbox"] {
+    transform: scale(1);
+    margin-right: 5px;
+    border: 1px solid #062263;
+}
+
+.custom-btn {
+    width: 100px; /* Adjust to your preference */
+    background-color: #062263; /* Change to your desired color */
+    color: #fff;
+    border: none;
+    border-radius: 40px;
+}
+
+.custom-btn:hover {
+    background-color: #5a78b5;
+}
+
+.login-link {
+    font-size: 13px;
+    color: #2a0d8c;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    color: #83bbf3;
+    text-decoration: underline;
+}
+
+
+.footer {
+    background-color: #032260;
+    color: white;
+    text-align: center;
+    font-size: 10px;
+    padding: 5px 0;
+}
+
+/*Registration*/
+.form-label {
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.form-control-sm {
+    padding: 5px 20px;
+    font-size: 14px;
+}
+
+
