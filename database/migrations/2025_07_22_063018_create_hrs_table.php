@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('security_answer');
             $table->string('password');
             $table->boolean('is_approved')->default(false);
+            $table->string('status')->default('pending'); // ADD THIS
+            $table->string('role')->default('hr'); // ADD THIS
             $table->timestamps();
         });
         

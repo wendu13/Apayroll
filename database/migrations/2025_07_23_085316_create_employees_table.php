@@ -37,11 +37,10 @@ return new class extends Migration
             $table->string('philhealth')->nullable();
             $table->string('pagibig')->nullable();
             $table->string('tin')->nullable();
-            $table->string('workday')->nullable();
-            $table->string('restday')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('bank_account')->nullable();
-            $table->decimal('basic_rate', 10, 2)->nullable(); // monthly
+            $table->decimal('basic_rate', 10, 2)->nullable();
+            $table->enum('rate_type', ['monthly', 'daily'])->nullable();
             $table->decimal('allowance', 10, 2)->nullable();
             $table->decimal('other_pay', 10, 2)->nullable();
             $table->string('photo')->nullable();
