@@ -28,7 +28,8 @@ Route::get('/forgot-password', [AuthController::class, 'showForgot']);
 Route::post('/forgot-password', [AuthController::class, 'resetPassword']);
 
 // HR ROUTES
-Route::middleware(['auth.hr'])->group(function () {
+Route::middleware(['auth.hr'])->group(function () 
+{
     // HR Dashboard
     Route::get('/hr/dashboard', [HrController::class, 'dashboard'])->name('hr.dashboard');
 
@@ -41,12 +42,18 @@ Route::resource('employees', EmployeeController::class);
     // Employee Schedules (nested)
     // -----------------------------
     Route::prefix('employees/{employee}')->group(function () {
-        // schedules resource (if you want full CRUD)
-        Route::resource('schedules', EmployeeScheduleController::class);
+        Route::resource('schedules', EmployeeScheduleController::class)
+            ->names([
+                'index'   => 'employees.schedules.index',
+                'create'  => 'employees.schedules.create',
+                'store'   => 'employees.schedules.store',
+                'show'    => 'employees.schedules.show',
+                'edit'    => 'employees.schedules.edit',
+                'update'  => 'employees.schedules.update',
+                'destroy' => 'employees.schedules.destroy',
+            ]);
 
-        // extra schedule routes
-        Route::post('schedules', [EmployeeScheduleController::class, 'store'])
-            ->name('employees.schedules.store');
+        // Extra routes
         Route::get('schedules/view/{file}', [EmployeeScheduleController::class, 'viewSchedule'])
             ->name('employees.schedules.view');
         Route::get('schedules/download/{id}', [EmployeeScheduleController::class, 'download'])
@@ -65,8 +72,6 @@ Route::resource('employees', EmployeeController::class);
 
     Route::patch('employees/{employee}/deductions/{deduction}/toggle-status', [EmployeeDeductionController::class, 'toggleStatus'])
         ->name('employees.deductions.toggle-status');
-
-
 
     // Calendar
     Route::resource('calendar', CalendarController::class);
@@ -103,7 +108,7 @@ Route::resource('employees', EmployeeController::class);
     });
 
     // Premium Routes - add to your existing authenticated routes
-    Route::get('/premium', [PremiumController::class, 'index'])->name('premium.index');
+    Route::get('/premium', [\App\Http\Controllers\PremiumController::class, 'index'])->name('premium.index');
     Route::put('/premium/update', [PremiumController::class, 'update'])->name('premium.update');
     Route::post('/premium/toggle/{id}', [PremiumController::class, 'toggleActive'])->name('premium.toggle');
     Route::put('/premium/category/{categoryId}', [PremiumController::class, 'updateCategory'])->name('premium.category.update');

@@ -1,0 +1,260 @@
+/* ============================= */
+/* MAIN ADD SCHEDULE CALENDAR    */
+/* ============================= */
+#mini-calendar { 
+    width: 100% !important;
+    height: auto !important;  /* 🔧 ADJUST HERE: dati fixed 380px, gawin mo auto or mas mataas */
+    display: block !important;
+}
+
+#mini-calendar .fc { 
+    width: 100% !important; 
+    height: auto !important;  /* 🔧 ADJUST HERE: auto height */
+}
+
+#mini-calendar .fc-view-harness { 
+    min-height: 400px !important;  /* 🔧 ADJUST HERE: dagdagan para magkasya hanggang 6 weeks */
+}
+
+#mini-calendar .fc-daygrid-day-frame { 
+    padding: 2px !important;   
+    min-height: 40px !important;  /* 🔧 ADJUST HERE: bawat date box */
+}
+
+/* ADD THESE NEW STYLES for smaller text */
+#mini-calendar .fc-daygrid-day-number {
+    font-size: 16px !important;
+}
+
+#mini-calendar .fc-col-header-cell {
+    padding: 3px !important;
+    font-size: 10px !important;
+}
+
+#mini-calendar .fc-toolbar-title {
+    font-size: 14px !important;
+}
+
+#mini-calendar .fc-toolbar {
+    margin-bottom: 0.5em !important;
+}
+
+/* ============================= */
+/* VIEW MODE - Single calendar   */
+/* ============================= */
+.single-calendar-container {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.single-calendar { 
+    width: 100% !important;
+    height: auto !important;   /* 🔧 ADJUST HERE: auto para hindi maputol last week */
+    display: block !important;
+}
+
+.single-calendar .fc { 
+    width: 100% !important; 
+    height: auto !important;   /* 🔧 ADJUST HERE */
+}
+
+.single-calendar .fc-view-harness { 
+    min-height: 500px !important;  /* 🔧 ADJUST HERE: taasan to kapag 6 weeks */
+}
+
+.single-calendar .fc-daygrid-day-frame { 
+    padding: 6px !important; 
+    min-height: 55px !important;   /* 🔧 ADJUST HERE: bawat cell height */
+}
+
+.single-calendar .fc-daygrid-day-number {
+    font-size: 14px !important;
+}
+
+.single-calendar .fc-col-header-cell {
+    padding: 8px !important;
+    font-size: 13px !important;
+}
+
+.single-calendar .fc-toolbar-title {
+    font-size: 18px !important;
+}
+
+/* ============================= */
+/* VIEW MODE - Multiple calendars*/
+/* ============================= */
+.multi-calendar { 
+    width: 100% !important;
+    height: auto !important;   /* 🔧 ADJUST HERE */
+    display: block !important;
+}
+
+.multi-calendar .fc { 
+    width: 100% !important; 
+    height: auto !important;   /* 🔧 ADJUST HERE */
+}
+
+.multi-calendar .fc-view-harness { 
+    min-height: 320px !important;  /* 🔧 ADJUST HERE */
+}
+
+.multi-calendar .fc-daygrid-day-frame { 
+    padding: 2px !important; 
+    min-height: 20px !important;   /* 🔧 ADJUST HERE */
+}
+
+.multi-calendar .fc-daygrid-day-number {
+    font-size: 12px !important;
+}
+
+.multi-calendar .fc-col-header-cell {
+    padding: 4px !important;
+    font-size: 11px !important;
+}
+
+.multi-calendar .fc-toolbar-title {
+    font-size: 14px !important;
+}
+
+.multi-calendar .fc-toolbar {
+    margin-bottom: 0.2em !important;
+}
+
+/* Taasan bawat date box sa VIEW mode */
+.single-calendar .fc-daygrid-day-frame,
+.multi-calendar .fc-daygrid-day-frame {
+    height: 50px !important;      /* taas ng bawat cell */
+    min-height: 50px !important;  /* siguraduhin hindi bumababa */
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Container for side-by-side calendars */
+.month-calendar-small {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 5px;
+    background: #f8f9fa;
+    width: 360px;
+    flex-shrink: 0;
+}
+
+#view-calendars-container {
+    max-height: none;
+    overflow: visible;
+}
+
+/* Remove internal scrollbars from calendars */
+.multi-calendar .fc-scroller,
+.single-calendar .fc-scroller,
+#mini-calendar .fc-scroller {
+    overflow: hidden !important;
+}
+
+.multi-calendar .fc-daygrid-body,
+.single-calendar .fc-daygrid-body,
+#mini-calendar .fc-daygrid-body {
+    overflow: hidden !important;
+}
+
+/* General calendar styling */
+.fc-scrollgrid {
+    border: 1px solid #ddd !important;
+}
+
+/* 🔧 ADJUST HERE: default row height ng bawat araw */
+.fc-daygrid-day-frame { 
+    padding: 2px !important; 
+    min-height: 40px !important;  /* dagdagan kung gusto mo mas malaki cell */
+}
+
+/* Custom day colors */
+.fc-day.restday { 
+    background-color: #B71C1C !important; 
+    color: #721c24 !important; 
+}
+
+.fc-day.working { 
+    background-color: #0D47A1 !important; 
+    color: #084298 !important; 
+}
+
+.fc-day:hover { 
+    cursor: pointer; 
+    opacity: 0.8; 
+}
+
+.fc-daygrid-day.taken { 
+    background: #eee; 
+}
+
+#view-legend {
+    text-align: center;
+}
+
+#view-legend .badge {
+    margin: 0 5px;
+    font-size: 0.8em;
+}
+
+/* Base font style for all dates */
+.single-calendar .fc-daygrid-day-number,
+.multi-calendar .fc-daygrid-day-number,
+#mini-calendar .fc-daygrid-day-number {
+    font-weight: bold !important;    /* make bold */
+    color: #000000 !important;       /* default color (black) */
+}
+
+/* Selected / highlighted dates */
+.single-calendar .fc-day.working .fc-daygrid-day-number,
+.multi-calendar .fc-day.working .fc-daygrid-day-number,
+#mini-calendar .fc-day.working .fc-daygrid-day-number,
+.single-calendar .fc-day.restday .fc-daygrid-day-number,
+.multi-calendar .fc-day.restday .fc-daygrid-day-number,
+#mini-calendar .fc-day.restday .fc-daygrid-day-number {
+    color: #FFFFFF !important;  /* white text for dark background */
+}
+
+
+
+
+/* Table column widths and alignment */
+.table thead th,
+.table tbody td {
+    vertical-align: middle; /* center vertically */
+}
+
+/* # column - left */
+.table thead th:first-child,
+.table tbody td:first-child {
+    width: 40px;
+    text-align: left;
+}
+
+/* Date Created column - left */
+.table thead th:nth-child(2),
+.table tbody td:nth-child(2) {
+    width: 320px;
+    text-align: left;
+}
+
+/* Week(s) column - center */
+.table thead th:nth-child(3),
+.table tbody td:nth-child(3) {
+    width: 80px;
+    text-align: center;
+}
+
+/* Action column - center */
+.table thead th:nth-child(4),
+.table tbody td:nth-child(4) {
+    width: auto;
+    text-align: center;
+}
+
+/* Optional: fixed layout for consistent column widths */
+.table {
+    table-layout: fixed;
+    width: 100%;
+}

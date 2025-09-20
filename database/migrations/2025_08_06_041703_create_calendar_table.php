@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('calendar', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('name');   // Holiday name
+            $table->string('type');   // Regular / Special
             $table->date('date');
             $table->timestamps();
         });
+        
     }
 
     /**

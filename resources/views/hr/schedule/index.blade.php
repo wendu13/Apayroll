@@ -49,10 +49,17 @@
             </div>
 
             {{-- RIGHT: Cutoff & Work Times --}}
+            {{-- Determine mode --}}
+            @php
+                $isNew = !$settings; // true if first time
+                $editing = $editMode || $isNew;
+            @endphp
+
             <div class="col-md-5">
                 <h5 class="mb-2">Cutoff Settings</h5>
-                
-                @if(!$settings || $editMode)
+
+                @if($editing)
+                    {{-- Editable form --}}
                     <div class="row mb-2">
                         <div class="col">
                             <label class="small">1st Start</label>
@@ -165,19 +172,16 @@
 
                     {{-- BUTTONS --}}
                     <div class="d-flex gap-2 mt-3">
-                        @if($editMode)
-                            <button type="submit" class="btn btn-primary btn-sm px-3">Save</button>
-                            <button type="button" 
-                                    class="btn btn-secondary btn-sm px-3" 
-                                    onclick="window.location.href='{{ route('schedule.index', ['year' => $year, 'month' => $month]) }}'">
-                                Cancel
-                            </button>
-                        @else
-                            <button type="button" class="btn btn-warning btn-sm px-3" id="editBtn">Edit</button>
+                        <button type="submit" class="btn btn-primary btn-sm px-3">Save</button>
+                        @if(!$isNew)
+                        <button type="button" class="btn btn-secondary btn-sm px-3" 
+                            onclick="window.location.href='{{ route('schedule.index', ['year' => $year, 'month' => $month]) }}'">
+                            Cancel
+                        </button>
                         @endif
                     </div>
-                    {{-- View Mode --}}
                 @else
+                    {{-- View Mode --}}
                     <div class="mb-2 small" 
                         data-fs="{{ $settings->first_half_start }}" 
                         data-fe="{{ $settings->first_half_end }}" 

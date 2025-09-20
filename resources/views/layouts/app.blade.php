@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('css/content.css') }}">
     
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     
 </head>
 <body class="d-flex flex-column" style="height: 100vh; margin: 0;">
@@ -111,44 +113,6 @@
                 <li><a href="#"><i data-lucide="archive"></i><span>Archive</span></a></li>
             </ul>
             
-        </div>
-
-        <ul class="sidebar-nav">
-            <li class="{{ $currentRoute == 'hr.dashboard' ? 'active' : '' }}">
-                <a href="{{ route('hr.dashboard') }}">
-                    <i data-lucide="layout-dashboard"></i><span>Dashboard</span>
-                </a>
-            </li>
-
-            <li class="{{ $currentRoute == 'employees.index' ? 'active' : '' }}">
-                <a href="{{ route('employees.index') }}">
-                    <i data-lucide="users"></i><span>Employee</span>
-                </a>
-            </li>
-            <li>
-            <a href="{{ route('schedule.index') }}">
-                <i data-lucide="calendar-clock"></i>
-                <span>Schedule</span>
-            </a>
-            </li>
-            <li class="{{ $currentRoute == 'deductions.index' ? 'active' : '' }}">
-                <a href="{{ route('deductions.index') }}">
-                    <i data-lucide="percent"></i><span>Deduction</span>
-                </a>
-            </li>
-            <li> <i data-lucide="badge-percent"></i><span>Premium</span></li>
-            <li><i data-lucide="file-text"></i><span>Payroll</span></li>
-            <li><i data-lucide="wallet"></i><span>Pay Slip</span></li>
-            
-            <li class="{{ $currentRoute == 'calendar.index' ? 'active' : '' }}">
-                <a href="{{ route('calendar.index') }}">
-                    <i data-lucide="users"></i><span>Calendar</span>
-                </a>
-            </li>
-
-            <li><i data-lucide="file-warning"></i><span>Report</span></li>
-            <li><i data-lucide="archive"></i><span>Archive</span></li>
-        </ul>
         </div>
 
         <div class="main-content">

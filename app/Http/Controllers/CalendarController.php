@@ -9,55 +9,36 @@ class CalendarController extends Controller
     public function index()
     {
         $holidays = Calendar::orderBy('date')->get();
+        $hasHolidays = $holidays->count() > 0;
     
-        $is_locked = Calendar::count() > 0; // 🔒 if there's data, disable further changes
-    
-        return view('hr.calendar.index', compact('holidays', 'is_locked'));
+        return view('hr.calendar.index', compact('holidays', 'hasHolidays'));
     }
-   
-
+    
     public function store(Request $request)
     {
         $holidays = $request->input('holidays', []);
     
-        if (empty($holidays)) {
-            return back()->withErrors(['No holidays to save.']);
-        }
+        // 🧹 Linisin muna lahat
+        Calendar::truncate();
     
-        $dates = [];
-        foreach ($holidays as $index => $holiday) {
-            $date = $holiday['date'];
-    
-            // ✅ Check for duplicate in the submitted holidays
-            if (in_array($date, $dates)) {
-                return back()->withErrors(["Duplicate date found in submission: $date"]);
-            }
-    
-            $dates[] = $date;
-    
-            // ✅ Check if this date already exists in DB
-            if (Calendar::where('date', $date)->exists()) {
-                return back()->withErrors(["Holiday for date $date already exists in the calendar."]);
-            }
-        }
-    
-        // ✅ Passed all checks: save holidays
+        // ✅ Insert lahat ng nasa form (kung meron)
         foreach ($holidays as $holiday) {
-            Calendar::create([
-                'date' => $holiday['date'],
-                'name' => $holiday['name'],
-                'type' => $holiday['type'],
-                'is_nationwide' => false,
-            ]);
+            if (!empty($holiday['date']) && !empty($holiday['name']) && !empty($holiday['type'])) {
+                Calendar::create([
+                    'date' => $holiday['date'],
+                    'name' => $holiday['name'],
+                    'type' => $holiday['type'],
+                ]);
+            }
         }
     
-        return redirect()->route('calendar.index')->with('success', 'Holidays saved successfully.');
+        return redirect()->back()->with('success', 'Holidays updated successfully.');
+
     }
     
-
     public function reset()
     {
-        Calendar::truncate(); // delete all
+        Calendar::truncate();
         return redirect()->back()->with('success', 'All holidays have been reset.');
     }
     

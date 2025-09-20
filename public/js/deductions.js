@@ -425,12 +425,12 @@ document.addEventListener('DOMContentLoaded', function() {
     hdmfModal.addEventListener('show.bs.modal', function() {
         const employee = hdmfModal.getAttribute('data-employee');
         const employer = hdmfModal.getAttribute('data-employer');
-    
+
         hdmfEmployee.value = employee || 0;
         hdmfEmployer.value = employer || 0;
-    
+
         if (employee && employer) {
-            // Show view mode
+            // SHOW VIEW MODE
             viewEmployee.textContent = employee;
             viewEmployer.textContent = employer;
             viewMode.style.display = 'block';
@@ -438,23 +438,31 @@ document.addEventListener('DOMContentLoaded', function() {
             editMode.style.display = 'none';
             editButtons.style.display = 'none';
         } else {
-            // Show edit mode
+            // SHOW EDIT MODE DIRECTLY
             viewMode.style.display = 'none';
             viewButtons.style.display = 'none';
             editMode.style.display = 'block';
             editButtons.style.display = 'block';
         }
     });
-    
-    // Cancel edit
+
+    // CLICK EDIT BUTTON: switch from view mode to edit mode
+    editButton.addEventListener('click', function() {
+        viewMode.style.display = 'none';
+        viewButtons.style.display = 'none';
+        editMode.style.display = 'block';
+        editButtons.style.display = 'block';
+    });
+
+    // CANCEL EDIT
     cancelButton.addEventListener('click', function() {
-        const employee = hdmfModal.getAttribute('data-employee') || 0;
-        const employer = hdmfModal.getAttribute('data-employer') || 0;
-    
-        hdmfEmployee.value = employee;
-        hdmfEmployer.value = employer;
-    
+        const employee = hdmfModal.getAttribute('data-employee');
+        const employer = hdmfModal.getAttribute('data-employer');
+
         if (employee && employer) {
+            // revert to view mode
+            hdmfEmployee.value = employee;
+            hdmfEmployer.value = employer;
             viewEmployee.textContent = employee;
             viewEmployer.textContent = employer;
             viewMode.style.display = 'block';
@@ -462,9 +470,10 @@ document.addEventListener('DOMContentLoaded', function() {
             editMode.style.display = 'none';
             editButtons.style.display = 'none';
         } else {
+            // close modal if nothing was saved yet
             bootstrap.Modal.getInstance(hdmfModal).hide();
         }
-    });    
+    });
 });
 
 // Income TAX functionality

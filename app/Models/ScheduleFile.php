@@ -1,10 +1,10 @@
 <?php
 
-// ScheduleFile.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class ScheduleFile extends Model
 {
@@ -12,7 +12,7 @@ class ScheduleFile extends Model
 
     protected $fillable = [
         'employee_id',
-        'cutoff_schedule_id',
+        'schedule_id',
         'time_in',
         'time_out',
         'weeks',
@@ -30,9 +30,9 @@ class ScheduleFile extends Model
         return $this->belongsTo(Employee::class);
     }
 
-    public function cutoff()
+    public function schedule()
     {
-        return $this->belongsTo(CutoffSchedule::class, 'cutoff_schedule_id');
+        return $this->belongsTo(Schedule::class, 'schedule_id');
     }
 
     public function employeeSchedules()
@@ -40,7 +40,7 @@ class ScheduleFile extends Model
         return $this->hasMany(EmployeeSchedule::class, 'schedule_file_id');
     }
 
-    // Helper method to get formatted days
+    // Helper: formatted days
     public function getFormattedDaysAttribute()
     {
         if (!$this->days_json) return [];
@@ -49,8 +49,8 @@ class ScheduleFile extends Model
             return [
                 'date' => $day['date'],
                 'type' => $day['type'],
-                'formatted_date' => \Carbon\Carbon::parse($day['date'])->format('M d, Y'),
-                'day_name' => \Carbon\Carbon::parse($day['date'])->format('l'),
+                'formatted_date' => Carbon::parse($day['date'])->format('M d, Y'),
+                'day_name' => Carbon::parse($day['date'])->format('l'),
             ];
         });
     }

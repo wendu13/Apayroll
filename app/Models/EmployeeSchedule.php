@@ -1,6 +1,5 @@
 <?php
 
-// EmployeeSchedule.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,15 +9,16 @@ class EmployeeSchedule extends Model
 {
     use HasFactory;
 
+    protected $table = 'employee_schedule'; // <-- eto yung nasa DB mo
+
     protected $fillable = [
         'employee_id',
-        'cutoff_schedule_id',
-        'schedule_file_id', // Add this if you're linking to ScheduleFile
+        'schedule_id',
+        'schedule_file_id',
         'date',
         'start_time',
         'end_time',
         'type',
-        'remarks',
     ];
 
     protected $casts = [
@@ -32,13 +32,14 @@ class EmployeeSchedule extends Model
         return $this->belongsTo(Employee::class);
     }
 
-    public function cutoff()
-    {
-        return $this->belongsTo(CutoffSchedule::class, 'cutoff_schedule_id');
-    }
-
     public function scheduleFile()
     {
-        return $this->belongsTo(ScheduleFile::class, 'schedule_file_id');
+        return $this->belongsTo(ScheduleFile::class);
+    }
+
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'schedule_id');
     }
 }
+

@@ -6,8 +6,10 @@
 @section('hr-content')
 <div class="container">
 
-    <a href="{{ route('employees.index') }}" class="btn btn-outline-secondary mb-3">← Back</a>
-    <p>{{ $employee->employee_number }} | {{ $employee->last_name }}, {{ $employee->first_name }}</p>
+    <div class="d-flex align-items-center gap-3 mb-3">
+        <a href="{{ route('employees.index') }}" class="btn btn-outline-secondary">Back</a>
+        <p class="mb-0">{{ $employee->employee_number }} | {{ $employee->last_name }}, {{ $employee->first_name }}</p>
+    </div>
 
     <!-- Tabs -->
     <ul class="nav nav-tabs" id="employeeTabs">

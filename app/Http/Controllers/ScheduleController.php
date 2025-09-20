@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CutoffSchedule;
-use App\Models\EmployeeSchedule;
 use App\Models\Schedule;
+use App\Models\EmployeeSchedule;
 use PDF;
 
 class ScheduleController extends Controller
@@ -16,7 +15,7 @@ class ScheduleController extends Controller
         $month = $request->get('month', date('n'));
         $editMode = $request->get('edit', false); // true kapag mag-eedit
 
-        $settings = CutoffSchedule::where('year', $year)->first();
+        $settings = Schedule::where('year', $year)->first();
 
         return view('hr.schedule.index', [
             'year' => $year,
@@ -40,7 +39,7 @@ class ScheduleController extends Controller
             'year' => 'required|integer'
         ]);
     
-        $schedule = CutoffSchedule::firstOrNew(['year' => $validated['year']]);
+        $schedule = Schedule::firstOrNew(['year' => $validated['year']]);
         $schedule->fill($validated);
         $schedule->save();
     
@@ -58,14 +57,14 @@ class ScheduleController extends Controller
             'time_out' => 'required',
         ]);
 
-        $cutoff = \App\Models\CutoffSchedule::latest()->first();
+        $schedule = Schedule::latest()->first();
 
         $days = json_decode($validated['days_json'], true);
 
         foreach ($days as $day) {
-            \App\Models\EmployeeSchedule::create([
+            EmployeeSchedule::create([
                 'employee_id' => $employeeId,
-                'cutoff_schedule_id' => $cutoff->id,
+                'schedule_id' => $schedule->id,
                 'date' => $day['date'],
                 'start_time' => $validated['time_in'],
                 'end_time' => $validated['time_out'],
@@ -76,19 +75,18 @@ class ScheduleController extends Controller
         return back()->with('success', 'Schedule generated successfully.');
     }
 
-    
-    public function view($employeeId, $cutoffId)
+    public function view($employeeId, $scheduleId)
     {
-        $employee = Employee::with('department')->findOrFail($employeeId);
-        $cutoff   = CutoffSchedule::findOrFail($cutoffId);
+        $employee = \App\Models\Employee::with('department')->findOrFail($employeeId);
+        $schedule = Schedule::findOrFail($scheduleId);
     
-        // kunin lahat ng schedules sa cutoff
+        // kunin lahat ng schedules sa schedule
         $schedules = EmployeeSchedule::where('employee_id', $employeeId)
-            ->where('cutoff_schedule_id', $cutoffId)
+            ->where('schedule_id', $scheduleId)
             ->orderBy('date')
             ->get();
     
-        return view('schedules.file', compact('employee','cutoff','schedules'));
+        return view('schedules.file', compact('employee','schedule','schedules'));
     }
 
     public function print($id)

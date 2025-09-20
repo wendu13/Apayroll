@@ -73,6 +73,7 @@
             <div class="col-md-6">
                 <label class="form-label">Confirm Password</label>
                 <input type="password" id="confirm_password" class="form-control form-control-sm" name="password_confirmation" placeholder="Confirm Password" required>
+                <small id="passwordMessage" class="d-block mt-1"></small>
             </div>
         </div>
 
@@ -95,5 +96,35 @@
             document.getElementById('password').type = type;
             document.getElementById('confirm_password').type = type;
         });
+
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirm_password');
+        const message = document.getElementById('passwordMessage');
+
+        function checkPasswords() {
+            if (!confirmPassword.value) {
+                message.textContent = "";
+                confirmPassword.classList.remove("is-valid", "is-invalid");
+                return;
+            }
+
+            if (password.value === confirmPassword.value) {
+                message.textContent = "Passwords match ✅";
+                message.classList.remove("text-danger");
+                message.classList.add("text-success");
+                confirmPassword.classList.add("is-valid");
+                confirmPassword.classList.remove("is-invalid");
+            } else {
+                message.textContent = "Passwords do not match ❌";
+                message.classList.remove("text-success");
+                message.classList.add("text-danger");
+                confirmPassword.classList.add("is-invalid");
+                confirmPassword.classList.remove("is-valid");
+            }
+        }
+
+        password.addEventListener('input', checkPasswords);
+        confirmPassword.addEventListener('input', checkPasswords);
+        
     </script>
 @endsection

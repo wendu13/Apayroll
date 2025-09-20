@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CutoffSchedule extends Model
+class Schedule extends Model
 {
     use HasFactory;
+    
+    protected $table = 'schedule'; // specify exact table name
 
     protected $fillable = [
         'year',
@@ -24,6 +26,6 @@ class CutoffSchedule extends Model
 
     public function employeeSchedules()
     {
-        return $this->hasMany(EmployeeSchedule::class, 'cutoff_schedule_id');
+        return $this->hasMany(EmployeeSchedule::class, 'schedule_id');
     }
 }

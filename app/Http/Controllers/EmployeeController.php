@@ -62,7 +62,7 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        $employee->load(['schedules.cutoff']);
+        $employee->load(['schedules.schedule']);
         return view('hr.employees.show', compact('employee'));
     }
 

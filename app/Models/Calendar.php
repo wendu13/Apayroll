@@ -13,6 +13,5 @@ class Calendar extends Model
         'date',
         'name',
         'type',
-        'is_nationwide',
     ];
 }
